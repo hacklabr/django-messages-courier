@@ -28,7 +28,7 @@ class UserTagsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('state', 'last_login', 'from_import',)
+        fields = ('state', 'last_login',)
 
 
     def get_last_login(self, obj):

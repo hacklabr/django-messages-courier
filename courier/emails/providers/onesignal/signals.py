@@ -1,15 +1,17 @@
-# -*- coding: utf-8 -*-
 import json
 import requests
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth import get_user_model
 
 from courier.emails.providers.onesignal.serializers import UserTagsSerializer
 from courier.emails.providers.onesignal.management.commands.sync_email_profiles import \
     get_email_auth_hash
 from courier.emails.providers.onesignal.models import OneSignalEmailProfile
-from ocupa.users.models import User
+
+User = get_user_model()
+
 
 @receiver(post_save, sender=User, dispatch_uid='update_onesignal_user')
 def update_user_tags(sender, instance, **kwargs):
